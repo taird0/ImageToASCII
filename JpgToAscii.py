@@ -1,7 +1,7 @@
 from PIL import Image, ImageOps
 import numpy as np
 
-asciiChars = '!"£$%^&*)]#~;@?'
+asciiChars = '@$%#"&"£)]!;^*"~?'
 
 def resizeImage(jpg, newWidth):
     width, height = jpg.size
@@ -21,6 +21,30 @@ def resizeImage(jpg, newWidth):
 
 
 with Image.open('unionj.jpg') as im:
-    Image.ImageOps.greyscale(im)
+    im = ImageOps.grayscale(im)
+    
+    im = resizeImage(im, 20)
 
-    im = resizeImage(im, 200)
+    width, height = im.size 
+
+    pixels = im.load()
+
+    asciiString = ''
+    asciiArt = []
+
+    for y in range(height):
+        for x in range(width):
+            pixel_value = pixels[x, y]
+            
+            asciiString += asciiChars[pixel_value // 17]
+        asciiArt.append(asciiString)
+    
+for asciiStr in asciiArt:
+    print(asciiString)
+
+
+with open('unionj.txt', 'w') as out:
+    for asciiStr in asciiArt:
+        out.write(asciiStr + '\n')
+    
+    
