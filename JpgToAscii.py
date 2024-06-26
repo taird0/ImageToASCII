@@ -45,4 +45,4 @@ if __name__ == "__main__":
     parser.add_argument('output_path', help="Path to create text file containing art")
 
     args = parser.parse_args()
-    main(args.input_image, args.outout_path)
+    main(args.input_image, args.output_path)
